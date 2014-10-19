@@ -1,3 +1,11 @@
+//
+//  LiveCode.ck
+//  CHmUsiCK
+//
+//  Created by Esteban Betancur on 18/10/14.
+//  Copyright (c) 2014 Esteban Betancur. All rights reserved.
+//
+
 // Ready to rock the world ??
 
 Drum drum; Bass bass; Synth synth; Melody melody;
@@ -12,7 +20,7 @@ master => dac;
 0.15 => Bus.channel[13].gain;
 0.9 => Bus.channel[14].gain;
 
-spork~drum.drum(120,8,[12]);
+spork~drum.drum(120,8,[1]);
 
 spork~bass.techBass(120,0,4);
 
