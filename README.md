@@ -40,6 +40,6 @@
 
 ##Class Melody
 
-###sinOsc, triOsc, sqrOsc, pulseOsc, sawOsc, bandedWG, blowBotl, blowHole, bowed, flute, mandolin, modalBar, moog, saxofony, sitar, stifKarp, voiceForm, beeThree, fmVoices, heveMetl, percFlut, rhodey, tubeBell, wurley
+###sinOsc, triOsc, sqrOsc, pulseOsc, sawOsc, bandedWG, blowBotl, blowHole, bowed, flute, mandolin, modalBar, moog, saxofony, sitar, stifKarp, voiceForm, beeThree, fmVoices, hevyMetl, percFlut, rhodey, tubeBell, wurley
 
 (float beat, float div, int notes[])
