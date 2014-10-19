@@ -1,3 +1,12 @@
+//
+//  DrumClass.ck
+//  CHmUsiCK
+//
+//  Created by Esteban Betancur on 18/10/14.
+//  Copyright (c) 2014 Esteban Betancur. All rights reserved.
+//
+
+
 public class Drum
 {
     SndBuf bassdrum => Bus.channel[1] => Bus.channel[0];
