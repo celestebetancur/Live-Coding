@@ -9,13 +9,13 @@
 
 public class Drum
 {
-    SndBuf bassdrum => Bus.channel[1] => Bus.channel[0];
-    SndBuf snaredrum => Bus.channel[2] => Bus.channel[0];
-    SndBuf hihatcymbal => Bus.channel[3] => Bus.channel[0];   
+    SndBuf bassdrum => Mixer.channel[1] => Mixer.channel[0];
+    SndBuf snaredrum => Mixer.channel[2] => Mixer.channel[0];
+    SndBuf hihatcymbal => Mixer.channel[3] => Mixer.channel[0];   
     
-    SndBuf CununoM1 => Bus.channel[5] => Bus.channel[4];
-    SndBuf CununoM2 => Bus.channel[6] => Bus.channel[4];
-    SndBuf Wasa => Bus.channel[7] => Bus.channel[4];
+    SndBuf CununoM1 => Mixer.channel[5] => Mixer.channel[4];
+    SndBuf CununoM2 => Mixer.channel[6] => Mixer.channel[4];
+    SndBuf Wasa => Mixer.channel[7] => Mixer.channel[4];
     
     me.dir() + "/Kick.wav" => bassdrum.read; 
     me.dir() + "/Snare-Clap.wav" => snaredrum.read;
@@ -33,14 +33,14 @@ public class Drum
     CununoM2.samples() => CununoM2.pos;
     Wasa.samples() => Wasa.pos;
     
-    Impulse kick =>TwoPole kp => Bus.channel[9] => Bus.channel[8];
+    Impulse kick =>TwoPole kp => Mixer.channel[9] => Mixer.channel[8];
     40.0 => kp.freq; 0.99 => kp.radius; 1 => kp.gain;
     
-    Noise sn => ADSR snare => TwoPole sp  => Bus.channel[10] => Bus.channel[8];
+    Noise sn => ADSR snare => TwoPole sp  => Mixer.channel[10] => Mixer.channel[8];
     600.0 => sp.freq; 0.9 => sp.radius; 0.1 => sp.gain;
     snare.set(0.001,0.1,0.0,0.1);
     
-    Noise hh => ADSR hihat => TwoPole hsp => Bus.channel[11] => Bus.channel[8];
+    Noise hh => ADSR hihat => TwoPole hsp => Mixer.channel[11] => Mixer.channel[8];
     7000.0 => hsp.freq; 0.9 => hsp.radius; 0.1 => hsp.gain;
     hihat.set(0.001,0.1,0.0,0.1);
     
