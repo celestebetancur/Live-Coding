@@ -1,3 +1,12 @@
+//
+//  Loop.ck
+//  CHmUsiCK
+//
+//  Created by Esteban Betancur on 18/10/14.
+//  Copyright (c) 2014 Esteban Betancur. All rights reserved.
+//
+
+
 Sync sync;
 sync.sync(120, 4,4,4) => float tempo;
 
