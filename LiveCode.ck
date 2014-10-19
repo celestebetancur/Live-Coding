@@ -11,14 +11,14 @@
 Drum drum; Bass bass; Synth synth; Melody melody;
 
 Gain master;
-for(0 => int i; i <= 14 ; i++) Bus.channel[i] => master;
+for(0 => int i; i <= 14 ; i++) Mixer.channel[i] => master;
 master => dac;
 
 0.5 => master.gain;
 
-1 => Bus.channel[12].gain;
-0.15 => Bus.channel[13].gain;
-0.9 => Bus.channel[14].gain;
+1 => Mixer.channel[12].gain;
+0.15 => Mixer.channel[13].gain;
+0.9 => Mixer.channel[14].gain;
 
 spork~drum.drum(120,8,[1]);
 
