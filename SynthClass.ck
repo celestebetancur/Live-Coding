@@ -15,7 +15,7 @@ public class Synth
         SinOsc polyphony[4];
         for (0 => int i; i < polyphony.cap(); i++)
         {
-            polyphony[i] => Bus.channel[13];
+            polyphony[i] => Mixer.channel[13];
         }
         while(true)
         {            
@@ -37,7 +37,7 @@ public class Synth
         SinOsc polyphony[4];
         for (0 => int i; i < polyphony.cap(); i++)
         {
-            polyphony[i] => Bus.channel[13];
+            polyphony[i] => Mixer.channel[13];
         } 
         while(true)
         {
@@ -58,7 +58,7 @@ public class Synth
         SinOsc polyphony[voices];
         for (0 => int i; i < polyphony.cap(); i++)
         {
-            polyphony[i] => Bus.channel[13];
+            polyphony[i] => Mixer.channel[13];
         }  
         
         while(true)
@@ -81,7 +81,7 @@ public class Synth
         SqrOsc polyphony[4];
         for (0 => int i; i < polyphony.cap(); i++)
         {
-            polyphony[i] => Bus.channel[13];
+            polyphony[i] => Mixer.channel[13];
         }  
         while(true)
         {
@@ -102,7 +102,7 @@ public class Synth
         SqrOsc polyphony[4];
         for (0 => int i; i < polyphony.cap(); i++)
         {
-            polyphony[i] => Bus.channel[13];
+            polyphony[i] => Mixer.channel[13];
         } 
         
         while(true)
@@ -124,7 +124,7 @@ public class Synth
         SqrOsc polyphony[voices];
         for (0 => int i; i < polyphony.cap(); i++)
         {
-            polyphony[i] => Bus.channel[13];
+            polyphony[i] => Mixer.channel[13];
         }   
         while(true)
         {
@@ -146,7 +146,7 @@ public class Synth
         TriOsc polyphony[4];
         for (0 => int i; i < polyphony.cap(); i++)
         {
-            polyphony[i] => Bus.channel[13];
+            polyphony[i] => Mixer.channel[13];
         }  
         while(true)
         {
@@ -167,7 +167,7 @@ public class Synth
         TriOsc polyphony[4];
         for (0 => int i; i < polyphony.cap(); i++)
         {
-            polyphony[i] => Bus.channel[13];
+            polyphony[i] => Mixer.channel[13];
         } 
         while(true)
         {
@@ -188,7 +188,7 @@ public class Synth
         TriOsc polyphony[voices];
         for (0 => int i; i < polyphony.cap(); i++)
         {
-            polyphony[i] => Bus.channel[13];
+            polyphony[i] => Mixer.channel[13];
         }  
         while(true)
         {
@@ -210,7 +210,7 @@ public class Synth
         SawOsc polyphony[4];
         for (0 => int i; i < polyphony.cap(); i++)
         {
-            polyphony[i] => Bus.channel[13];
+            polyphony[i] => Mixer.channel[13];
         }
         while(true)
         {
@@ -231,7 +231,7 @@ public class Synth
         SawOsc polyphony[4];
         for (0 => int i; i < polyphony.cap(); i++)
         {
-            polyphony[i] => Bus.channel[13];
+            polyphony[i] => Mixer.channel[13];
         }
         while(true)
         {
@@ -252,7 +252,7 @@ public class Synth
         SawOsc polyphony[voices];
         for (0 => int i; i < polyphony.cap(); i++)
         {
-            polyphony[i] => Bus.channel[13];
+            polyphony[i] => Mixer.channel[13];
         }  
         while(true)
         {
@@ -274,7 +274,7 @@ public class Synth
         PulseOsc polyphony[4];
         for (0 => int i; i < polyphony.cap(); i++)
         {
-            polyphony[i] => Bus.channel[13];
+            polyphony[i] => Mixer.channel[13];
         }
         while(true)
         {
@@ -295,7 +295,7 @@ public class Synth
         PulseOsc polyphony[4];
         for (0 => int i; i < polyphony.cap(); i++)
         {
-            polyphony[i] => Bus.channel[13];
+            polyphony[i] => Mixer.channel[13];
         } 
         while(true)
         {
@@ -316,7 +316,7 @@ public class Synth
         PulseOsc polyphony[voices];
         for (0 => int i; i < polyphony.cap(); i++)
         {
-            polyphony[i] => Bus.channel[13];
+            polyphony[i] => Mixer.channel[13];
         }
         while(true)
         {
