@@ -1,3 +1,7 @@
+#CHmUsiCK
+
+Kind of interface to write dance-code music using ChucK
+
 ##Class Drum
 
 ###drum, pacificDrum, synthDrum
