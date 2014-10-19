@@ -9,7 +9,7 @@
 
 public class Bass
 {
-    TriOsc Bass => ADSR e => Bus.channel[12];
+    TriOsc Bass => ADSR e => Mixer.channel[12];
     
     e.set(10::ms, 8::ms, .5, 5::ms);
     
