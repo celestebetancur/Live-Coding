@@ -11,7 +11,7 @@ public class Melody
 {   
     public void sinOsc(float beat,float div,int notes[])
     {
-        SinOsc sin => ADSR e => Bus.channel[14];
+        SinOsc sin => ADSR e => Mixer.channel[14];
         e.set(10::ms, 8::ms, .5, 5::ms);
         240.0/beat => float tempo;
 
@@ -36,7 +36,7 @@ public class Melody
     }
     public void triOsc(float beat,float div,int notes[])
     {
-        TriOsc tri => ADSR e => Bus.channel[14];
+        TriOsc tri => ADSR e => Mixer.channel[14];
         e.set(10::ms, 8::ms, .5, 5::ms);
         240.0/beat => float tempo;
         
@@ -61,7 +61,7 @@ public class Melody
     }
     public void sqrOsc(float beat,float div,int notes[])
     {
-        SqrOsc sqr => ADSR e => Bus.channel[14];
+        SqrOsc sqr => ADSR e => Mixer.channel[14];
         e.set(10::ms, 8::ms, .5, 5::ms);
         240.0/beat => float tempo;
         
@@ -86,7 +86,7 @@ public class Melody
     }
     public void pulseOsc(float beat,float div,int notes[])
     {
-        PulseOsc pulse => ADSR e => Bus.channel[14];
+        PulseOsc pulse => ADSR e => Mixer.channel[14];
         e.set(10::ms, 8::ms, .5, 5::ms);
         240.0/beat => float tempo;
         
@@ -111,7 +111,7 @@ public class Melody
     }
     public void sawOsc(float beat,float div,int notes[])
     {
-        SawOsc saw => ADSR e => Bus.channel[14];
+        SawOsc saw => ADSR e => Mixer.channel[14];
         e.set(10::ms, 8::ms, .5, 5::ms);
         240.0/beat => float tempo;
         
@@ -136,7 +136,7 @@ public class Melody
     }
     public void bandedWG(float beat,float div,int notes[])
     {
-        BandedWG BWG => Bus.channel[14];
+        BandedWG BWG => Mixer.channel[14];
         240.0/beat => float tempo;
         
         while(true)
@@ -161,7 +161,7 @@ public class Melody
     }
     public void blowBotl(float beat,float div,int notes[])
     {
-        BlowBotl BB => Bus.channel[14];
+        BlowBotl BB => Mixer.channel[14];
         240.0/beat => float tempo;
         
         while(true)
@@ -186,7 +186,7 @@ public class Melody
     }
     public void blowHole(float beat,float div,int notes[])
     {
-        BlowHole BH => Bus.channel[14];
+        BlowHole BH => Mixer.channel[14];
         240.0/beat => float tempo;
         
         while(true)
@@ -211,7 +211,7 @@ public class Melody
     }
     public void blowHole(float beat,float div,int notes[])
     {
-        BlowHole BH => Bus.channel[14];
+        BlowHole BH => Mixer.channel[14];
         240.0/beat => float tempo;
         
         while(true)
@@ -236,7 +236,7 @@ public class Melody
     }
     public void bowed(float beat,float div,int notes[])
     {
-        Bowed bowed => Bus.channel[14];
+        Bowed bowed => Mixer.channel[14];
         240.0/beat => float tempo;
                 
         while(true)
@@ -261,7 +261,7 @@ public class Melody
     }
     public void flute(float beat,float div,int notes[])
     {
-        Flute flute => Bus.channel[14];
+        Flute flute => Mixer.channel[14];
         240.0/beat => float tempo;
         
         while(true)
@@ -286,7 +286,7 @@ public class Melody
     }
     public void mandolin(float beat,float div,int notes[])
     {
-        Mandolin mandolin => Bus.channel[14];
+        Mandolin mandolin => Mixer.channel[14];
         240.0/beat => float tempo;
         
         while(true)
@@ -311,7 +311,7 @@ public class Melody
     }
     public void modalBar(float beat,float div,int notes[])
     {
-        ModalBar MB => Bus.channel[14];
+        ModalBar MB => Mixer.channel[14];
         240.0/beat => float tempo;
         
         while(true)
@@ -336,7 +336,7 @@ public class Melody
     }
     public void moog(float beat,float div,int notes[])
     {
-        Moog moog => Bus.channel[14];
+        Moog moog => Mixer.channel[14];
         240.0/beat => float tempo;
         
         while(true)
@@ -361,7 +361,7 @@ public class Melody
     }
     public void saxofony(float beat,float div,int notes[])
     {
-        Saxofony sax => Bus.channel[14];
+        Saxofony sax => Mixer.channel[14];
         240.0/beat => float tempo;
         
         while(true)
@@ -386,7 +386,7 @@ public class Melody
     }
     public void sitar(float beat,float div,int notes[])
     {
-        Sitar sitar => Bus.channel[14];
+        Sitar sitar => Mixer.channel[14];
         240.0/beat => float tempo;
         
         while(true)
@@ -411,7 +411,7 @@ public class Melody
     }
     public void stifKarp(float beat,float div,int notes[])
     {
-        StifKarp SK => Bus.channel[14];
+        StifKarp SK => Mixer.channel[14];
         240.0/beat => float tempo;
         
         while(true)
@@ -436,7 +436,7 @@ public class Melody
     }
     public void voicForm(float beat,float div,int notes[])
     {
-        VoicForm VF => Bus.channel[14];
+        VoicForm VF => Mixer.channel[14];
         240.0/beat => float tempo;
         
         while(true)
@@ -461,7 +461,7 @@ public class Melody
     }
     public void beeThree(float beat,float div,int notes[])
     {
-        BeeThree BT => Bus.channel[14];
+        BeeThree BT => Mixer.channel[14];
         240.0/beat => float tempo;
         
         while(true)
@@ -486,7 +486,7 @@ public class Melody
     }
     public void fmVoices(float beat,float div,int notes[])
     {
-        FMVoices fmv => Bus.channel[14];
+        FMVoices fmv => Mixer.channel[14];
         240.0/beat => float tempo;
         
         while(true)
@@ -511,7 +511,7 @@ public class Melody
     }
     public void hevyMetl(float beat,float div,int notes[])
     {
-        HevyMetl HM => Bus.channel[14];
+        HevyMetl HM => Mixer.channel[14];
         240.0/beat => float tempo;
         
         while(true)
@@ -536,7 +536,7 @@ public class Melody
     }
     public void percFlut(float beat,float div,int notes[])
     {
-        PercFlut PF => Bus.channel[14];
+        PercFlut PF => Mixer.channel[14];
         240.0/beat => float tempo;
         
         while(true)
@@ -561,7 +561,7 @@ public class Melody
     }
     public void rhodey(float beat,float div,int notes[])
     {
-        Rhodey rhodey => Bus.channel[14];
+        Rhodey rhodey => Mixer.channel[14];
         240.0/beat => float tempo;
         
         while(true)
@@ -586,7 +586,7 @@ public class Melody
     }
     public void tubeBell(float beat,float div,int notes[])
     {
-        TubeBell TB => Bus.channel[14];
+        TubeBell TB => Mixer.channel[14];
         240.0/beat => float tempo;
         
         while(true)
@@ -611,7 +611,7 @@ public class Melody
     }
     public void wurley(float beat,float div,int notes[])
     {
-        Wurley BH => Bus.channel[14];
+        Wurley BH => Mixer.channel[14];
         240.0/beat => float tempo;
         
         while(true)
