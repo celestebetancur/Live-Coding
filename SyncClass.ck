@@ -2,30 +2,25 @@
 //  SyncClass.ck
 //  CHmUsiCK
 //
-//  Created by Esteban Betancur on 18/10/14.
+//  Created by Esteban Betancur on 04/11/14.
 //  Copyright (c) 2014 Esteban Betancur. All rights reserved.
 //
 
 public class Sync
 {
-    static float tempofix; 
+    static float tSync; 
     
     public float sync() 
     {
-        8.0 => tempofix; return tempofix;
+        8.0 => tSync; return tSync;
     }
     
-    public float sync(float beat)
+    public float sync(float beats)
     {
-        ((60/beat)*16) => tempofix; return tempofix;
+        beats => tSync; return tSync;
     }
-    public float sync(float beat, float howmany)
+    public float sync(float beats, float measure)
     {
-        (((60/beat)*howmany)) => tempofix;  return tempofix;
-    }
-    public float sync(float beat, float howmany, float div)
-    {
-        (240/beat) => float t; (t/div) => float quarter;
-        (quarter * howmany) => tempofix;  return tempofix;
+        (beats * measure) => tSync;  return tSync;
     }
 }
