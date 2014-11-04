@@ -8,10 +8,13 @@
 Tap tap;
 tap.tap();
 
+Sync sync;
+sync.sync(4,4);
+
 while(true)
 {
     Machine.add(me.dir()+"/LiveCode.ck") => int fileID;
-    (Tap.beat * 32) => now;
+    (Tap.beat * Sync.tSync) => now;
     Machine.replace(fileID,"/LiveCode.ck");
     Machine.remove(fileID);
 }
