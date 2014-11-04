@@ -7,16 +7,20 @@
 //
 
 
-public class Bass
+public class Bass extends Chubgraph
 {
-    TriOsc Bass => ADSR e => Mixer.channel[12];
-    
-    e.set(10::ms, 8::ms, .5, 5::ms);
+    TriOsc Bass => ADSR e => Gain bassGain => outlet;
+    e.set(10::ms, 8::ms, 1, 5::ms);
     
     int basspatern[5];
     
     Modes modes;
     Rhythm rhythm;
+    
+    public void gain(float vol) 
+    {
+        vol => bassGain.gain;
+    }
     
     public void bass (int chords[])
     {  
@@ -46,14 +50,12 @@ public class Bass
         }
     }
     
-    public void bass (float beat,int chords[])
+    public void bass (dur beat,int chords[])
     { 
         modes.modes(1) @=> int scale[];
         rhythm.rhythm(4) @=> float r[];
         
         36 => int octave;
-        
-        (60/beat) => float tempo;
         
         while(true)
         {
@@ -69,21 +71,19 @@ public class Bass
                 {
                     Std.mtof(basspatern[ii]) => Bass.freq; 
                     e.keyOn();
-                    (tempo*r[ii])::second => now;
+                    (beat*r[ii])=> now;
                     e.keyOff();    
                 }
             }
         }
     }
     
-    public void bass (float beat,int chords[],int measure)
+    public void bass (dur beat,int chords[],int measure)
     { 
         modes.modes(1) @=> int scale[];
         rhythm.rhythm(measure) @=> float r[];
         
         36 => int octave;
-        
-        60/beat => float tempo;
         
         while(true)
         {
@@ -99,22 +99,20 @@ public class Bass
                 {
                     Std.mtof(basspatern[ii]) => Bass.freq; 
                     e.keyOn();
-                    (tempo*r[ii])::second => now;
+                    (beat*r[ii]) => now;
                     e.keyOff();    
                 }
             }
         }
     } 
     
-    public void bass (float beat,int key,int chords[])
+    public void bass (dur beat,int key,int chords[])
     { 
         modes.modes(1) @=> int scale[];
         rhythm.rhythm(4) @=> float r[];
         
         36 => int octave;
         
-        60/beat => float tempo;
-        
         while(true)
         {
             for(0 => int i;i < chords.cap(); i++)
@@ -129,22 +127,20 @@ public class Bass
                 {
                     Std.mtof(basspatern[ii]) => Bass.freq; 
                     e.keyOn();
-                    (tempo*r[ii])::second => now;
+                    (beat*r[ii]) => now;
                     e.keyOff();    
                 }
             }
         }
     } 
     
-    public void bass (float beat,int key,int chords[],int measure)
+    public void bass (dur beat,int key,int chords[],int measure)
     { 
         modes.modes(1) @=> int scale[];
         rhythm.rhythm(measure) @=> float r[];
         
         36 => int octave;
         
-        (60/beat) => float tempo;
-        
         while(true)
         {
             for(0 => int i;i < chords.cap(); i++)
@@ -159,21 +155,19 @@ public class Bass
                 {
                     Std.mtof(basspatern[ii]) => Bass.freq; 
                     e.keyOn();
-                    (tempo*r[ii])::second => now;
+                    (beat*r[ii]) => now;
                     e.keyOff();    
                 }
             }
         }
     } 
     
-    public void bass (float beat,int Scale,int key,int chords[],int measure)
+    public void bass (dur beat,int Scale,int key,int chords[],int measure)
     { 
         modes.modes(Scale) @=> int scale[];
         rhythm.rhythm(measure) @=> float r[];
         
         Scale + 24 => int octave;
-        
-        (60/beat) => float tempo;
         
         while(true)
         {
@@ -189,7 +183,7 @@ public class Bass
                 {
                     Std.mtof(basspatern[ii]) => Bass.freq; 
                     e.keyOn();
-                    (tempo*r[ii])::second => now;
+                    (beat*r[ii]) => now;
                     e.keyOff();    
                 }
             }
@@ -205,28 +199,17 @@ public class Bass
             e.keyOff();
         }
     }
-    public void techBass (float beat, int pattern)
+    public void techBass (dur beat, int pattern)
     {
-        if(pattern == 0)
-        {
-            while(true)
-            {
-                Std.mtof(24) => Bass.freq;
-                e.keyOn();
-                (60/beat)::second => now;
-                e.keyOff();
-                ((60/beat)*3)::second => now;
-            }
-        }
         if(pattern == 1)
         {
             while(true)
             {
                 Std.mtof(24) => Bass.freq;
                 e.keyOn();
-                (60/beat)::second => now;
+                beat => now;
                 e.keyOff();
-                (60/beat)::second => now;
+                beat => now;
             }
         }
         if(pattern == 2)
@@ -235,14 +218,9 @@ public class Bass
             {
                 Std.mtof(24) => Bass.freq;
                 e.keyOn();
-                (30/beat)::second => now;
+                beat => now;
                 e.keyOff();
-                (30/beat)::second => now;
-                Std.mtof(36) => Bass.freq;
-                e.keyOn();
-                (30/beat)::second => now;
-                e.keyOff();
-                (30/beat)::second => now;
+                beat => now;
             }
         }
         if(pattern == 3)
@@ -251,19 +229,14 @@ public class Bass
             {
                 Std.mtof(24) => Bass.freq;
                 e.keyOn();
-                (30/beat)::second => now;
+                (beat * 0.5) => now;
                 e.keyOff();
-                (30/beat)::second => now;
+                (beat * 0.5) => now;
                 Std.mtof(36) => Bass.freq;
                 e.keyOn();
-                (15/beat)::second => now;
+                (beat * 0.5) => now;
                 e.keyOff();
-                (15/beat)::second => now;
-                Std.mtof(36) => Bass.freq;
-                e.keyOn();
-                (15/beat)::second => now;
-                e.keyOff();
-                (15/beat)::second => now;
+                (beat * 0.5) => now;
             }
         }
         if(pattern == 4)
@@ -272,52 +245,62 @@ public class Bass
             {
                 Std.mtof(24) => Bass.freq;
                 e.keyOn();
-                (15/beat)::second => now;
+                (beat * 0.5) => now;
                 e.keyOff();
-                (15/beat)::second => now;
+                (beat * 0.5) => now;
                 Std.mtof(36) => Bass.freq;
                 e.keyOn();
-                (15/beat)::second => now;
+                (beat * 0.25) => now;
                 e.keyOff();
-                (15/beat)::second => now;
+                (beat * 0.25) => now;
+                Std.mtof(36) => Bass.freq;
+                e.keyOn();
+                (beat * 0.25) => now;
+                e.keyOff();
+                (beat * 0.25) => now;
+            }
+        }
+        if(pattern == 5)
+        {
+            while(true)
+            {
                 Std.mtof(24) => Bass.freq;
                 e.keyOn();
-                (15/beat)::second => now;
+                (beat * 0.25) => now;
                 e.keyOff();
-                (15/beat)::second => now;
+                (beat * 0.25) => now;
                 Std.mtof(36) => Bass.freq;
                 e.keyOn();
-                (15/beat)::second => now;
+                (beat * 0.25) => now;
                 e.keyOff();
-                (15/beat)::second => now;
+                (beat * 0.25) => now;
+                Std.mtof(24) => Bass.freq;
+                e.keyOn();
+                (beat * 0.25) => now;
+                e.keyOff();
+                (beat * 0.25) => now;
+                Std.mtof(36) => Bass.freq;
+                e.keyOn();
+                (beat * 0.25) => now;
+                e.keyOff();
+                (beat * 0.25) => now;
             }
         }
     }
-    public void techBass (float beat,int key, int pattern)
+    public void techBass (dur beat,int key, int pattern)
     {
         (24 + key) => int note;
         (36 + key) => int octave;
         
-        if(pattern == 0)
-        {
-            while(true)
-            {
-                Std.mtof(note) => Bass.freq;
-                e.keyOn();
-                (60/beat)::second => now;
-                e.keyOff();
-                ((60/beat)*3)::second => now;
-            }
-        }
         if(pattern == 1)
         {
             while(true)
             {
                 Std.mtof(note) => Bass.freq;
                 e.keyOn();
-                (60/beat)::second => now;
+                beat => now;
                 e.keyOff();
-                (60/beat)::second => now;
+                beat => now; 
             }
         }
         if(pattern == 2)
@@ -326,14 +309,9 @@ public class Bass
             {
                 Std.mtof(note) => Bass.freq;
                 e.keyOn();
-                (30/beat)::second => now;
+                beat => now;
                 e.keyOff();
-                (30/beat)::second => now;
-                Std.mtof(octave) => Bass.freq;
-                e.keyOn();
-                (30/beat)::second => now;
-                e.keyOff();
-                (30/beat)::second => now;
+                beat => now;
             }
         }
         if(pattern == 3)
@@ -342,19 +320,14 @@ public class Bass
             {
                 Std.mtof(note) => Bass.freq;
                 e.keyOn();
-                (30/beat)::second => now;
+                (beat * 0.5) => now;
                 e.keyOff();
-                (30/beat)::second => now;
+                (beat * 0.5) => now;
                 Std.mtof(octave) => Bass.freq;
                 e.keyOn();
-                (15/beat)::second => now;
+                (beat * 0.5) => now;
                 e.keyOff();
-                (15/beat)::second => now;
-                Std.mtof(octave) => Bass.freq;
-                e.keyOn();
-                (15/beat)::second => now;
-                e.keyOff();
-                (15/beat)::second => now;
+                (beat * 0.5) => now;
             }
         }
         if(pattern == 4)
@@ -363,24 +336,45 @@ public class Bass
             {
                 Std.mtof(note) => Bass.freq;
                 e.keyOn();
-                (15/beat)::second => now;
+                (beat * 0.5) => now;
                 e.keyOff();
-                (15/beat)::second => now;
+                (beat * 0.5) => now;
                 Std.mtof(octave) => Bass.freq;
                 e.keyOn();
-                (15/beat)::second => now;
+                (beat * 0.25) => now;
                 e.keyOff();
-                (15/beat)::second => now;
+                (beat * 0.25) => now;
+                Std.mtof(octave) => Bass.freq;
+                e.keyOn();
+                (beat * 0.25) => now;
+                e.keyOff();
+                (beat * 0.25) => now;
+            }
+        }
+        if(pattern == 5)
+        {
+            while(true)
+            {
                 Std.mtof(note) => Bass.freq;
                 e.keyOn();
-                (15/beat)::second => now;
+                (beat * 0.25) => now;
                 e.keyOff();
-                (15/beat)::second => now;
+                (beat * 0.25) => now;
                 Std.mtof(octave) => Bass.freq;
                 e.keyOn();
-                (15/beat)::second => now;
+                (beat * 0.25) => now;
                 e.keyOff();
-                (15/beat)::second => now;
+                (beat * 0.25) => now;
+                Std.mtof(note) => Bass.freq;
+                e.keyOn();
+                (beat * 0.25) => now;
+                e.keyOff();
+                (beat * 0.25) => now;
+                Std.mtof(octave) => Bass.freq;
+                e.keyOn();
+                (beat * 0.25) => now;
+                e.keyOff();
+                (beat * 0.25) => now;
             }
         }
     }
