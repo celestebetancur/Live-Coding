@@ -55,6 +55,7 @@ public class Tap
                     (memory[1]-memory[0])=> partial2;   
                     (partial1 + partial2) / 2=> beat;     
                 }  
+                beat => now // make patch start at beat one next measure
                 return (beat);
                 <<<(beat / 44.100),"ms","/",(beat / 44100),"second">>>;
                 memory.clear();
