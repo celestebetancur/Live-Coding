@@ -6,17 +6,19 @@
 //  Copyright (c) 2014 Esteban Betancur. All rights reserved.
 //
 
-public class Synth
+
+public class Synth extends Chubgraph
 {  
     Harmony chords;
     
     public void sinOsc(string note[])
     {
-        SinOsc polyphony[4];
+        MagicSine polyphony[4];
         for (0 => int i; i < polyphony.cap(); i++)
         {
-            polyphony[i] => Mixer.channel[13];
-        }
+            polyphony[i] => Gain vol => outlet;
+            0.2 => vol.gain;
+        }        
         while(true)
         {            
             for (0 => int i; i < note.cap(); i++)
@@ -32,12 +34,15 @@ public class Synth
         }
     }
 
-    public void sinOsc(float tempo,string note[])
+    public void sinOsc(dur beat,string note[])
     {
+        (beat / 0.25) => dur tempo;
+        
         SinOsc polyphony[4];
         for (0 => int i; i < polyphony.cap(); i++)
         {
-            polyphony[i] => Mixer.channel[13];
+            polyphony[i] => Gain vol => outlet;
+            0.2 => vol.gain;
         } 
         while(true)
         {
@@ -49,16 +54,19 @@ public class Synth
                 {
                     Std.mtof(harmony[i]) => polyphony[i].freq;                
                 }
-                (240/tempo)::second => now;  
+                tempo => now;  
             }
         }
     }
-    public void sinOsc(float tempo,string note[],int voices)
+    public void sinOsc(dur beat,string note[],int voices)
     {
+        (beat / 0.25) => dur tempo;
+        
         SinOsc polyphony[voices];
         for (0 => int i; i < polyphony.cap(); i++)
         {
-            polyphony[i] => Mixer.channel[13];
+            polyphony[i] => Gain vol => outlet;
+            0.2 => vol.gain;
         }  
         
         while(true)
@@ -71,7 +79,7 @@ public class Synth
                 {
                     Std.mtof(harmony[i]) => polyphony[i].freq;                
                 }
-                (240/tempo)::second => now;  
+                tempo => now;  
             }
         }
     }
@@ -81,7 +89,8 @@ public class Synth
         SqrOsc polyphony[4];
         for (0 => int i; i < polyphony.cap(); i++)
         {
-            polyphony[i] => Mixer.channel[13];
+            polyphony[i] => Gain vol => outlet;
+            0.2 => vol.gain;
         }  
         while(true)
         {
@@ -97,12 +106,15 @@ public class Synth
             }
         }
     }
-    public void sqrOsc(float tempo,string note[])
+    public void sqrOsc(dur beat, string note[])
     {
+        (beat / 0.25) => dur tempo;
+        
         SqrOsc polyphony[4];
         for (0 => int i; i < polyphony.cap(); i++)
         {
-            polyphony[i] => Mixer.channel[13];
+            polyphony[i] => Gain vol => outlet;
+            0.2 => vol.gain;
         } 
         
         while(true)
@@ -115,16 +127,19 @@ public class Synth
                 {
                     Std.mtof(harmony[i]) => polyphony[i].freq;                
                 }
-                (240/tempo)::second => now;  
+                tempo => now;  
             }
         }
     }
-    public void sqrOsc(float tempo,string note[],int voices)
+    public void sqrOsc(dur beat,string note[],int voices)
     {
+        (beat / 0.25) => dur tempo;
+        
         SqrOsc polyphony[voices];
         for (0 => int i; i < polyphony.cap(); i++)
         {
-            polyphony[i] => Mixer.channel[13];
+            polyphony[i] => Gain vol => outlet;
+            0.2 => vol.gain;
         }   
         while(true)
         {
@@ -136,7 +151,7 @@ public class Synth
                 {
                     Std.mtof(harmony[i]) => polyphony[i].freq;                
                 }
-                (240/tempo)::second => now;  
+                tempo => now;  
             }
         }
     }
@@ -146,7 +161,8 @@ public class Synth
         TriOsc polyphony[4];
         for (0 => int i; i < polyphony.cap(); i++)
         {
-            polyphony[i] => Mixer.channel[13];
+            polyphony[i] => Gain vol => outlet;
+            0.2 => vol.gain;
         }  
         while(true)
         {
@@ -162,12 +178,15 @@ public class Synth
             }
         }
     }
-    public void triOsc(float tempo,string note[])
+    public void triOsc(dur beat, string note[])
     {
+        (beat / 0.25) => dur tempo;
+        
         TriOsc polyphony[4];
         for (0 => int i; i < polyphony.cap(); i++)
         {
-            polyphony[i] => Mixer.channel[13];
+            polyphony[i] => Gain vol => outlet;
+            0.2 => vol.gain;
         } 
         while(true)
         {
@@ -179,16 +198,19 @@ public class Synth
                 {
                     Std.mtof(harmony[i]) => polyphony[i].freq;                
                 }
-                (240/tempo)::second => now;  
+                tempo => now;  
             }
         }
     }
-    public void triOsc(float tempo,string note[],int voices)
+    public void triOsc(dur beat, string note[],int voices)
     {
+        (beat / 0.25) => dur tempo;
+        
         TriOsc polyphony[voices];
         for (0 => int i; i < polyphony.cap(); i++)
         {
-            polyphony[i] => Mixer.channel[13];
+            polyphony[i] => Gain vol => outlet;
+            0.2 => vol.gain;
         }  
         while(true)
         {
@@ -200,7 +222,7 @@ public class Synth
                 {
                     Std.mtof(harmony[i]) => polyphony[i].freq;                
                 }
-                (240/tempo)::second => now;  
+                tempo => now;  
             }
         }
     }
@@ -210,7 +232,8 @@ public class Synth
         SawOsc polyphony[4];
         for (0 => int i; i < polyphony.cap(); i++)
         {
-            polyphony[i] => Mixer.channel[13];
+            polyphony[i] => Gain vol => outlet;
+            0.2 => vol.gain;
         }
         while(true)
         {
@@ -226,12 +249,15 @@ public class Synth
             }
         }
     }
-    public void sawOsc(float tempo,string note[])
+    public void sawOsc(dur beat, string note[])
     {
+        (beat / 0.25) => dur tempo;
+        
         SawOsc polyphony[4];
         for (0 => int i; i < polyphony.cap(); i++)
         {
-            polyphony[i] => Mixer.channel[13];
+            polyphony[i] => Gain vol => outlet;
+            0.2 => vol.gain;
         }
         while(true)
         {
@@ -243,16 +269,19 @@ public class Synth
                 {
                     Std.mtof(harmony[i]) => polyphony[i].freq;                
                 }
-                (240/tempo)::second => now;  
+                tempo => now;  
             }
         }
     }
-    public void sawOsc(float tempo,string note[],int voices)
+    public void sawOsc(dur beat, string note[],int voices)
     {
+        (beat / 0.25) => dur tempo;
+        
         SawOsc polyphony[voices];
         for (0 => int i; i < polyphony.cap(); i++)
         {
-            polyphony[i] => Mixer.channel[13];
+            polyphony[i] => Gain vol => outlet;
+            0.2 => vol.gain;
         }  
         while(true)
         {
@@ -264,7 +293,7 @@ public class Synth
                 {
                     Std.mtof(harmony[i]) => polyphony[i].freq;                
                 }
-                (240/tempo)::second => now;  
+                tempo=> now;  
             }
         }
     }
@@ -274,7 +303,8 @@ public class Synth
         PulseOsc polyphony[4];
         for (0 => int i; i < polyphony.cap(); i++)
         {
-            polyphony[i] => Mixer.channel[13];
+            polyphony[i] => Gain vol => outlet;
+            0.2 => vol.gain;
         }
         while(true)
         {
@@ -290,12 +320,15 @@ public class Synth
             }
         }
     }
-    public void pulseOsc(float tempo,string note[])
+    public void pulseOsc(dur beat, string note[])
     {
+        (beat / 0.25) => dur tempo;
+        
         PulseOsc polyphony[4];
         for (0 => int i; i < polyphony.cap(); i++)
         {
-            polyphony[i] => Mixer.channel[13];
+            polyphony[i] => Gain vol => outlet;
+            0.2 => vol.gain;
         } 
         while(true)
         {
@@ -307,16 +340,19 @@ public class Synth
                 {
                     Std.mtof(harmony[i]) => polyphony[i].freq;                
                 }
-                (240/tempo)::second => now;  
+                tempo => now;  
             }
         }
     }
-    public void pulseOsc(float tempo,string note[],int voices)
+    public void pulseOsc(dur beat, string note[],int voices)
     {
+        (beat / 0.25) => dur tempo;
+        
         PulseOsc polyphony[voices];
         for (0 => int i; i < polyphony.cap(); i++)
         {
-            polyphony[i] => Mixer.channel[13];
+            polyphony[i] => Gain vol => outlet;
+            0.2 => vol.gain;
         }
         while(true)
         {
@@ -328,7 +364,7 @@ public class Synth
                 {
                     Std.mtof(harmony[i]) => polyphony[i].freq;                
                 }
-                (240/tempo)::second => now;  
+                tempo => now;  
             }
         }
     }
