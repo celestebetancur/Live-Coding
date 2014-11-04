@@ -20,4 +20,7 @@ spork~bass.techBass(Tap.beat,3);
 Tap tap; 
 tap.tap() => Tap.beat;
 
+Sync sync;
+sync.sync(4,4) => Sync.tSync;
+
 while(true) 1::second => now;
