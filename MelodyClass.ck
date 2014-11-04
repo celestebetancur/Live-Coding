@@ -7,38 +7,66 @@
 //
 
 
-public class Melody
+public class Melody extends Chubgraph
 {   
-    public void sinOsc(float beat,float div,int notes[])
+    Gain vol => outlet;
+    
+    SinOsc sin => ADSR a => vol;
+    SqrOsc sqr => ADSR b => vol;
+    PulseOsc pulse => ADSR c => vol;
+    SawOsc saw => ADSR d => vol;
+    TriOsc tri =>  ADSR e => vol;
+    BandedWG BWG => vol;
+    BlowBotl BB => vol;
+    Wurley W => vol;
+    TubeBell TB => vol;
+    Rhodey rhod => vol;
+    PercFlut PF => vol;
+    BlowHole BH => vol;
+    Bowed bow => vol;
+    Flute flut => vol;
+    Mandolin mandol => vol;
+    Saxofony sax => vol;
+    Moog mg => vol;
+    Sitar sit => vol;
+    ModalBar MB => vol;
+    HevyMetl HM => vol;
+    StifKarp SK => vol;
+    BeeThree BT => vol;
+    FMVoices fmv => vol;
+    
+    a.set(10::ms, 8::ms, .5, 5::ms);
+    b.set(10::ms, 8::ms, .5, 5::ms);
+    c.set(10::ms, 8::ms, .5, 5::ms);
+    d.set(10::ms, 8::ms, .5, 5::ms);
+    e.set(10::ms, 8::ms, .5, 5::ms);
+    
+    public void sinOsc(dur beat,float div,int notes[])
     {
-        SinOsc sin => ADSR e => Mixer.channel[14];
-        e.set(10::ms, 8::ms, .5, 5::ms);
-        240.0/beat => float tempo;
-
+        (beat * 4) => dur tempo;
+        
         while(true)
         {
             for(0 => int i; i < notes.cap(); i++)
             {
                 if(notes[i] == 0)
                 {
-                    e.keyOff();
-                    (tempo/div)::second => now;
+                    a.keyOff();
+                    (tempo/div) => now;
                 }
                 else
                 {
                     Std.mtof(notes[i]) => sin.freq;
-                    e.keyOn();
-                    (tempo/div)::second => now;
-                    e.keyOff();
+                    a.keyOn();
+                    (tempo/div) => now;
+                    a.keyOff();
                 }
             }          
         }
     }
-    public void triOsc(float beat,float div,int notes[])
-    {
-        TriOsc tri => ADSR e => Mixer.channel[14];
-        e.set(10::ms, 8::ms, .5, 5::ms);
-        240.0/beat => float tempo;
+    public void triOsc(dur beat,float div,int notes[])
+    {        
+        (beat * 4) => dur tempo;
         
         while(true)
         {
@@ -47,23 +75,21 @@ public class Melody
                 if(notes[i] == 0)
                 {
                     e.keyOff();
-                    (tempo/div)::second => now;
+                    (tempo/div) => now;
                 }
                 else
                 {
                     Std.mtof(notes[i]) => tri.freq;
                     e.keyOn();
-                    (tempo/div)::second => now;
+                    (tempo/div) => now;
                     e.keyOff();
                 }
             }          
         }
     }
-    public void sqrOsc(float beat,float div,int notes[])
+    public void sqrOsc(dur beat,float div,int notes[])
     {
-        SqrOsc sqr => ADSR e => Mixer.channel[14];
-        e.set(10::ms, 8::ms, .5, 5::ms);
-        240.0/beat => float tempo;
+        (beat * 4) => dur tempo;
         
         while(true)
         {
@@ -71,24 +97,22 @@ public class Melody
             {
                 if(notes[i] == 0)
                 {
-                    e.keyOff();
-                    (tempo/div)::second => now;
+                    b.keyOff();
+                    (tempo/div) => now;
                 }
                 else
                 {
                     Std.mtof(notes[i]) => sqr.freq;
-                    e.keyOn();
-                    (tempo/div)::second => now;
-                    e.keyOff();
+                    b.keyOn();
+                    (tempo/div) => now;
+                    b.keyOff();
                 }
             }          
         }
     }
-    public void pulseOsc(float beat,float div,int notes[])
+    public void pulseOsc(dur beat,float div,int notes[])
     {
-        PulseOsc pulse => ADSR e => Mixer.channel[14];
-        e.set(10::ms, 8::ms, .5, 5::ms);
-        240.0/beat => float tempo;
+        (beat * 4) => dur tempo;
         
         while(true)
         {
@@ -96,24 +120,22 @@ public class Melody
             {
                 if(notes[i] == 0)
                 {
-                    e.keyOff();
-                    (tempo/div)::second => now;
+                    c.keyOff();
+                    (tempo/div) => now;
                 }
                 else
                 {
                     Std.mtof(notes[i]) => pulse.freq;
-                    e.keyOn();
-                    (tempo/div)::second => now;
-                    e.keyOff();
+                    c.keyOn();
+                    (tempo/div) => now;
+                    c.keyOff();
                 }
             }          
         }
     }
-    public void sawOsc(float beat,float div,int notes[])
+    public void sawOsc(dur beat,float div,int notes[])
     {
-        SawOsc saw => ADSR e => Mixer.channel[14];
-        e.set(10::ms, 8::ms, .5, 5::ms);
-        240.0/beat => float tempo;
+        (beat * 4) => dur tempo;
         
         while(true)
         {
@@ -121,23 +143,22 @@ public class Melody
             {
                 if(notes[i] == 0)
                 {
-                    e.keyOff();
-                    (tempo/div)::second => now;
+                    d.keyOff();
+                    (tempo/div) => now;
                 }
                 else
                 {
                     Std.mtof(notes[i]) => saw.freq;
-                    e.keyOn();
-                    (tempo/div)::second => now;
-                    e.keyOff();
+                    d.keyOn();
+                    (tempo/div) => now;
+                    d.keyOff();
                 }
             }          
         }
     }
-    public void bandedWG(float beat,float div,int notes[])
+    public void bandedWG(dur beat,float div,int notes[])
     {
-        BandedWG BWG => Mixer.channel[14];
-        240.0/beat => float tempo;
+        (beat * 4) => dur tempo;
         
         while(true)
         {
@@ -146,23 +167,22 @@ public class Melody
                 if(notes[i] == 0)
                 {
                     BWG.noteOff;
-                    (tempo/div)::second => now;
+                    (tempo/div) => now;
                 }
                 else
                 {
                     Std.mtof(notes[i]) => BWG.freq;
                     1 => BWG.noteOn;
                     BWG.noteOn;
-                    (tempo/div)::second => now;
+                    (tempo/div) => now;
                     BWG.noteOff;
                 }
             }          
         }
     }
-    public void blowBotl(float beat,float div,int notes[])
+    public void blowBotl(dur beat,float div,int notes[])
     {
-        BlowBotl BB => Mixer.channel[14];
-        240.0/beat => float tempo;
+        (beat * 4) => dur tempo;
         
         while(true)
         {
@@ -171,23 +191,22 @@ public class Melody
                 if(notes[i] == 0)
                 {
                     BB.noteOff;
-                    (tempo/div)::second => now;
+                    (tempo/div) => now;
                 }
                 else
                 {
                     Std.mtof(notes[i]) => BB.freq;
                     1 => BB.noteOn;
                     BB.noteOn;
-                    (tempo/div)::second => now;
+                    (tempo/div) => now;
                     BB.noteOff;
                 }
             }          
         }
     }
-    public void blowHole(float beat,float div,int notes[])
+    public void blowHole(dur beat,float div,int notes[])
     {
-        BlowHole BH => Mixer.channel[14];
-        240.0/beat => float tempo;
+        (beat * 4) => dur tempo;
         
         while(true)
         {
@@ -196,23 +215,22 @@ public class Melody
                 if(notes[i] == 0)
                 {
                     BH.noteOff;
-                    (tempo/div)::second => now;
+                    (tempo/div) => now;
                 }
                 else
                 {
                     Std.mtof(notes[i]) => BH.freq;
                     1 => BH.noteOn;
                     BH.noteOn;
-                    (tempo/div)::second => now;
+                    (tempo/div) => now;
                     BH.noteOff;
                 }
             }          
         }
     }
-    public void blowHole(float beat,float div,int notes[])
+    public void bowed(dur beat,float div,int notes[])
     {
-        BlowHole BH => Mixer.channel[14];
-        240.0/beat => float tempo;
+        (beat * 4) => dur tempo;
         
         while(true)
         {
@@ -220,49 +238,23 @@ public class Melody
             {
                 if(notes[i] == 0)
                 {
-                    BH.noteOff;
-                    (tempo/div)::second => now;
+                    bow.noteOff;
+                    (tempo/div) => now;
                 }
                 else
                 {
-                    Std.mtof(notes[i]) => BH.freq;
-                    1 => BH.noteOn;
-                    BH.noteOn;
-                    (tempo/div)::second => now;
-                    BH.noteOff;
+                    Std.mtof(notes[i]) => bow.freq;
+                    1 => bow.noteOn;
+                    bow.noteOn;
+                    (tempo/div) => now;
+                    bow.noteOff;
                 }
             }          
         }
     }
-    public void bowed(float beat,float div,int notes[])
+    public void flute(dur beat,float div,int notes[])
     {
-        Bowed bowed => Mixer.channel[14];
-        240.0/beat => float tempo;
-                
-        while(true)
-        {
-            for(0 => int i; i < notes.cap(); i++)
-            {
-                if(notes[i] == 0)
-                {
-                    bowed.noteOff;
-                    (tempo/div)::second => now;
-                }
-                else
-                {
-                    Std.mtof(notes[i]) => bowed.freq;
-                    1 => bowed.noteOn;
-                    bowed.noteOn;
-                    (tempo/div)::second => now;
-                    bowed.noteOff;
-                }
-            }          
-        }
-    }
-    public void flute(float beat,float div,int notes[])
-    {
-        Flute flute => Mixer.channel[14];
-        240.0/beat => float tempo;
+        (beat * 4) => dur tempo;
         
         while(true)
         {
@@ -270,24 +262,23 @@ public class Melody
             {
                 if(notes[i] == 0)
                 {
-                    flute.noteOff;
-                    (tempo/div)::second => now;
+                    flut.noteOff;
+                    (tempo/div) => now;
                 }
                 else
                 {
-                    Std.mtof(notes[i]) => flute.freq;
-                    1 => flute.noteOn;
-                    flute.noteOn;
-                    (tempo/div)::second => now;
-                    flute.noteOff;
+                    Std.mtof(notes[i]) => flut.freq;
+                    1 => flut.noteOn;
+                    flut.noteOn;
+                    (tempo/div) => now;
+                    flut.noteOff;
                 }
             }          
         }
     }
-    public void mandolin(float beat,float div,int notes[])
+    public void mandolin(dur beat,float div,int notes[])
     {
-        Mandolin mandolin => Mixer.channel[14];
-        240.0/beat => float tempo;
+       (beat * 4) => dur tempo;
         
         while(true)
         {
@@ -295,24 +286,23 @@ public class Melody
             {
                 if(notes[i] == 0)
                 {
-                    mandolin.noteOff;
-                    (tempo/div)::second => now;
+                    mandol.noteOff;
+                    (tempo/div) => now;
                 }
                 else
                 {
-                    Std.mtof(notes[i]) => mandolin.freq;
-                    1 => mandolin.noteOn;
-                    mandolin.noteOn;
-                    (tempo/div)::second => now;
-                    mandolin.noteOff;
+                    Std.mtof(notes[i]) => mandol.freq;
+                    1 => mandol.noteOn;
+                    mandol.noteOn;
+                    (tempo/div) => now;
+                    mandol.noteOff;
                 }
             }          
         }
     }
-    public void modalBar(float beat,float div,int notes[])
+    public void modalBar(dur beat,float div,int notes[])
     {
-        ModalBar MB => Mixer.channel[14];
-        240.0/beat => float tempo;
+        (beat * 4) => dur tempo;
         
         while(true)
         {
@@ -321,23 +311,22 @@ public class Melody
                 if(notes[i] == 0)
                 {
                     MB.noteOff;
-                    (tempo/div)::second => now;
+                    (tempo/div) => now;
                 }
                 else
                 {
                     Std.mtof(notes[i]) => MB.freq;
                     1 => MB.noteOn;
                     MB.noteOn;
-                    (tempo/div)::second => now;
+                    (tempo/div)=> now;
                     MB.noteOff;
                 }
             }          
         }
     }
-    public void moog(float beat,float div,int notes[])
+    public void moog(dur beat,float div,int notes[])
     {
-        Moog moog => Mixer.channel[14];
-        240.0/beat => float tempo;
+        (beat * 4) => dur tempo;
         
         while(true)
         {
@@ -345,24 +334,23 @@ public class Melody
             {
                 if(notes[i] == 0)
                 {
-                    moog.noteOff;
-                    (tempo/div)::second => now;
+                    mg.noteOff;
+                    (tempo/div) => now;
                 }
                 else
                 {
-                    Std.mtof(notes[i]) => moog.freq;
-                    1 => moog.noteOn;
-                    moog.noteOn;
-                    (tempo/div)::second => now;
-                    moog.noteOff;
+                    Std.mtof(notes[i]) => mg.freq;
+                    1 => mg.noteOn;
+                    mg.noteOn;
+                    (tempo/div) => now;
+                    mg.noteOff;
                 }
             }          
         }
     }
-    public void saxofony(float beat,float div,int notes[])
+    public void saxofony(dur beat,float div,int notes[])
     {
-        Saxofony sax => Mixer.channel[14];
-        240.0/beat => float tempo;
+        (beat * 4) => dur tempo;
         
         while(true)
         {
@@ -371,23 +359,22 @@ public class Melody
                 if(notes[i] == 0)
                 {
                     sax.noteOff;
-                    (tempo/div)::second => now;
+                    (tempo/div) => now;
                 }
                 else
                 {
                     Std.mtof(notes[i]) => sax.freq;
                     1 => sax.noteOn;
                     sax.noteOn;
-                    (tempo/div)::second => now;
+                    (tempo/div) => now;
                     sax.noteOff;
                 }
             }          
         }
     }
-    public void sitar(float beat,float div,int notes[])
+    public void sitar(dur beat,float div,int notes[])
     {
-        Sitar sitar => Mixer.channel[14];
-        240.0/beat => float tempo;
+        (beat * 4) => dur tempo;
         
         while(true)
         {
@@ -395,24 +382,23 @@ public class Melody
             {
                 if(notes[i] == 0)
                 {
-                    sitar.noteOff;
-                    (tempo/div)::second => now;
+                    sit.noteOff;
+                    (tempo/div) => now;
                 }
                 else
                 {
-                    Std.mtof(notes[i]) => sitar.freq;
-                    1 => sitar.noteOn;
-                    sitar.noteOn;
-                    (tempo/div)::second => now;
-                    sitar.noteOff;
+                    Std.mtof(notes[i]) => sit.freq;
+                    1 => sit.noteOn;
+                    sit.noteOn;
+                    (tempo/div) => now;
+                    sit.noteOff;
                 }
             }          
         }
     }
-    public void stifKarp(float beat,float div,int notes[])
+    public void stifKarp(dur beat,float div,int notes[])
     {
-        StifKarp SK => Mixer.channel[14];
-        240.0/beat => float tempo;
+        (beat * 4) => dur tempo;
         
         while(true)
         {
@@ -421,48 +407,23 @@ public class Melody
                 if(notes[i] == 0)
                 {
                     SK.noteOff;
-                    (tempo/div)::second => now;
+                    (tempo/div) => now;
                 }
                 else
                 {
                     Std.mtof(notes[i]) => SK.freq;
                     1 => SK.noteOn;
                     SK.noteOn;
-                    (tempo/div)::second => now;
+                    (tempo/div) => now;
                     SK.noteOff;
                 }
             }          
         }
     }
-    public void voicForm(float beat,float div,int notes[])
+    
+    public void beeThree(dur beat,float div,int notes[])
     {
-        VoicForm VF => Mixer.channel[14];
-        240.0/beat => float tempo;
-        
-        while(true)
-        {
-            for(0 => int i; i < notes.cap(); i++)
-            {
-                if(notes[i] == 0)
-                {
-                    VF.noteOff;
-                    (tempo/div)::second => now;
-                }
-                else
-                {
-                    Std.mtof(notes[i]) => VF.freq;
-                    1 => VF.noteOn;
-                    VF.noteOn;
-                    (tempo/div)::second => now;
-                    VF.noteOff;
-                }
-            }          
-        }
-    }
-    public void beeThree(float beat,float div,int notes[])
-    {
-        BeeThree BT => Mixer.channel[14];
-        240.0/beat => float tempo;
+        (beat * 4) => dur tempo;
         
         while(true)
         {
@@ -471,23 +432,22 @@ public class Melody
                 if(notes[i] == 0)
                 {
                     BT.noteOff;
-                    (tempo/div)::second => now;
+                    (tempo/div) => now;
                 }
                 else
                 {
                     Std.mtof(notes[i]) => BT.freq;
                     1 => BT.noteOn;
                     BT.noteOn;
-                    (tempo/div)::second => now;
+                    (tempo/div) => now;
                     BT.noteOff;
                 }
             }          
         }
     }
-    public void fmVoices(float beat,float div,int notes[])
+    public void fmVoices(dur beat,float div,int notes[])
     {
-        FMVoices fmv => Mixer.channel[14];
-        240.0/beat => float tempo;
+        (beat * 4) => dur tempo;
         
         while(true)
         {
@@ -496,23 +456,22 @@ public class Melody
                 if(notes[i] == 0)
                 {
                     fmv.noteOff;
-                    (tempo/div)::second => now;
+                    (tempo/div) => now;
                 }
                 else
                 {
                     Std.mtof(notes[i]) => fmv.freq;
                     1 => fmv.noteOn;
                     fmv.noteOn;
-                    (tempo/div)::second => now;
+                    (tempo/div) => now;
                     fmv.noteOff;
                 }
             }          
         }
     }
-    public void hevyMetl(float beat,float div,int notes[])
+    public void hevyMetl(dur beat,float div,int notes[])
     {
-        HevyMetl HM => Mixer.channel[14];
-        240.0/beat => float tempo;
+        (beat * 4) => dur tempo;
         
         while(true)
         {
@@ -521,23 +480,22 @@ public class Melody
                 if(notes[i] == 0)
                 {
                     HM.noteOff;
-                    (tempo/div)::second => now;
+                    (tempo/div) => now;
                 }
                 else
                 {
                     Std.mtof(notes[i]) => HM.freq;
                     1 => HM.noteOn;
                     HM.noteOn;
-                    (tempo/div)::second => now;
+                    (tempo/div) => now;
                     HM.noteOff;
                 }
             }          
         }
     }
-    public void percFlut(float beat,float div,int notes[])
+    public void percFlut(dur beat,float div,int notes[])
     {
-        PercFlut PF => Mixer.channel[14];
-        240.0/beat => float tempo;
+        (beat * 4) => dur tempo;
         
         while(true)
         {
@@ -546,23 +504,22 @@ public class Melody
                 if(notes[i] == 0)
                 {
                     PF.noteOff;
-                    (tempo/div)::second => now;
+                    (tempo/div) => now;
                 }
                 else
                 {
                     Std.mtof(notes[i]) => PF.freq;
                     1 => PF.noteOn;
                     PF.noteOn;
-                    (tempo/div)::second => now;
+                    (tempo/div) => now;
                     PF.noteOff;
                 }
             }          
         }
     }
-    public void rhodey(float beat,float div,int notes[])
+    public void rhodey(dur beat,float div,int notes[])
     {
-        Rhodey rhodey => Mixer.channel[14];
-        240.0/beat => float tempo;
+        (beat * 4) => dur tempo;
         
         while(true)
         {
@@ -570,24 +527,23 @@ public class Melody
             {
                 if(notes[i] == 0)
                 {
-                    rhodey.noteOff;
-                    (tempo/div)::second => now;
+                    rhod.noteOff;
+                    (tempo/div) => now;
                 }
                 else
                 {
-                    Std.mtof(notes[i]) => rhodey.freq;
-                    1 => rhodey.noteOn;
-                    rhodey.noteOn;
-                    (tempo/div)::second => now;
-                    rhodey.noteOff;
+                    Std.mtof(notes[i]) => rhod.freq;
+                    1 => rhod.noteOn;
+                    rhod.noteOn;
+                    (tempo/div) => now;
+                    rhod.noteOff;
                 }
             }          
         }
     }
-    public void tubeBell(float beat,float div,int notes[])
+    public void tubeBell(dur beat,float div,int notes[])
     {
-        TubeBell TB => Mixer.channel[14];
-        240.0/beat => float tempo;
+        (beat * 4) => dur tempo;
         
         while(true)
         {
@@ -596,23 +552,22 @@ public class Melody
                 if(notes[i] == 0)
                 {
                     TB.noteOff;
-                    (tempo/div)::second => now;
+                    (tempo/div) => now;
                 }
                 else
                 {
                     Std.mtof(notes[i]) => TB.freq;
                     1 => TB.noteOn;
                     TB.noteOn;
-                    (tempo/div)::second => now;
+                    (tempo/div) => now;
                     TB.noteOff;
                 }
             }          
         }
     }
-    public void wurley(float beat,float div,int notes[])
+    public void wurley(dur beat,float div,int notes[])
     {
-        Wurley BH => Mixer.channel[14];
-        240.0/beat => float tempo;
+        (beat * 4) => dur tempo;
         
         while(true)
         {
@@ -620,16 +575,16 @@ public class Melody
             {
                 if(notes[i] == 0)
                 {
-                    BH.noteOff;
-                    (tempo/div)::second => now;
+                    W.noteOff;
+                    (tempo/div) => now;
                 }
                 else
                 {
-                    Std.mtof(notes[i]) => BH.freq;
-                    1 => BH.noteOn;
-                    BH.noteOn;
-                    (tempo/div)::second => now;
-                    BH.noteOff;
+                    Std.mtof(notes[i]) => W.freq;
+                    1 => W.noteOn;
+                    W.noteOn;
+                    (tempo/div)=> now;
+                    W.noteOff;
                 }
             }          
         }
