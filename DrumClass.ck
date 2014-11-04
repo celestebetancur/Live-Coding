@@ -7,15 +7,17 @@
 //
 
 
-public class Drum
+public class Drum extends Chubgraph
 {
-    SndBuf bassdrum => Mixer.channel[1] => Mixer.channel[0];
-    SndBuf snaredrum => Mixer.channel[2] => Mixer.channel[0];
-    SndBuf hihatcymbal => Mixer.channel[3] => Mixer.channel[0];   
+    Gain vol => outlet;
     
-    SndBuf CununoM1 => Mixer.channel[5] => Mixer.channel[4];
-    SndBuf CununoM2 => Mixer.channel[6] => Mixer.channel[4];
-    SndBuf Wasa => Mixer.channel[7] => Mixer.channel[4];
+    SndBuf bassdrum => vol;
+    SndBuf snaredrum => vol;
+    SndBuf hihatcymbal => vol; 
+    
+    SndBuf CununoM1 => vol;
+    SndBuf CununoM2 => vol;
+    SndBuf Wasa => vol;
     
     me.dir() + "/Kick.wav" => bassdrum.read; 
     me.dir() + "/Snare-Clap.wav" => snaredrum.read;
@@ -33,16 +35,21 @@ public class Drum
     CununoM2.samples() => CununoM2.pos;
     Wasa.samples() => Wasa.pos;
     
-    Impulse kick =>TwoPole kp => Mixer.channel[9] => Mixer.channel[8];
+    Impulse kick =>TwoPole kp => vol;
     40.0 => kp.freq; 0.99 => kp.radius; 1 => kp.gain;
     
-    Noise sn => ADSR snare => TwoPole sp  => Mixer.channel[10] => Mixer.channel[8];
+    Noise sn => ADSR snare => TwoPole sp  => vol;
     600.0 => sp.freq; 0.9 => sp.radius; 0.1 => sp.gain;
     snare.set(0.001,0.1,0.0,0.1);
     
-    Noise hh => ADSR hihat => TwoPole hsp => Mixer.channel[11] => Mixer.channel[8];
+    Noise hh => ADSR hihat => TwoPole hsp => vol;
     7000.0 => hsp.freq; 0.9 => hsp.radius; 0.1 => hsp.gain;
     hihat.set(0.001,0.1,0.0,0.1);
+    
+    public void gain(float volum)
+    {
+        volum => vol.gain;
+    }
     
     public void drum (int k[])
     {
@@ -59,7 +66,7 @@ public class Drum
         }
     }
     
-    public void drum (float beat,int k[])
+    public void drum (dur beat,int k[])
     {
         while(true)
         {
@@ -69,14 +76,15 @@ public class Drum
                 {
                     0 => bassdrum.pos;
                 }
-                (60/beat)::second => now;
+                beat => now;
             }
         }
     }
     
-    public void drum (float beat,float div,int k[])
+    public void drum (dur beat,float div,int k[])
     {
-        240.0/beat => float tempo;
+        (div / 4) => float factor;
+        (beat / factor) => dur tempo;
         
         while(true)
         {
@@ -86,7 +94,7 @@ public class Drum
                 {
                     0 => bassdrum.pos;
                 }
-                (tempo/div)::second => now;
+                tempo => now;
             }
         }
     }
@@ -110,7 +118,7 @@ public class Drum
         }
     }
     
-    public void drum (float beat,int k[],int hh[])
+    public void drum (dur beat,int k[],int hh[])
     {
         while(true)
         {
@@ -124,14 +132,15 @@ public class Drum
                 {
                     0 => hihatcymbal.pos;
                 }
-                (60/beat)::second => now;
+                beat => now;
             }
         }
     }
     
-    public void drum (float beat,float div,int k[],int hh[])
+    public void drum (dur beat,float div,int k[],int hh[])
     {
-        240.0/beat => float tempo;
+        (div / 4) => float factor;
+        (beat / factor) => dur tempo;
         
         while(true)
         {
@@ -145,7 +154,7 @@ public class Drum
                 {
                     0 => hihatcymbal.pos;
                 }
-                (tempo/div)::second => now;
+                tempo => now;
             }
         }
     }
@@ -173,7 +182,7 @@ public class Drum
         }
     }
     
-    public void drum (float beat,int k[],int s[],int hh[])
+    public void drum (dur beat,int k[],int s[],int hh[])
     {
         while(true)
         {
@@ -191,14 +200,15 @@ public class Drum
                 {
                     0 => hihatcymbal.pos;
                 }
-                (60/beat)::second => now;
+                beat => now;
             }
         }
     }
     
-    public void drum (float beat,float div,int k[],int s[],int hh[])
+    public void drum (dur beat,float div,int k[],int s[],int hh[])
     {
-        240.0/beat => float tempo;
+        (div / 4) => float factor;
+        (beat / factor) => dur tempo;
              
         while(true)
         {
@@ -216,7 +226,7 @@ public class Drum
                 {
                     0 => hihatcymbal.pos;
                 }
-                (tempo/div)::second => now;
+                tempo => now;
             }
         }
     }
@@ -235,7 +245,7 @@ public class Drum
         }
     }
     
-    public void pacificDrum (float beat,int k[])
+    public void pacificDrum (dur beat,int k[])
     {
         while(true)
         {
@@ -245,14 +255,15 @@ public class Drum
                 {
                     0 => CununoM1.pos;
                 }
-                (60/beat)::second => now;
+                beat=> now;
             }
         }
     }
     
-    public void pacificDrum (float beat,float div,int k[])
+    public void pacificDrum (dur beat,float div,int k[])
     {
-        240.0/beat => float tempo;
+        (div / 4) => float factor;
+        (beat / factor) => dur tempo;
         
         while(true)
         {
@@ -262,7 +273,7 @@ public class Drum
                 {
                     0 => CununoM1.pos;
                 }
-                (tempo/div)::second => now;
+                tempo => now;
             }
         }
     }
@@ -286,7 +297,7 @@ public class Drum
         }
     }
     
-    public void pacificDrum (float beat,int k[],int hh[])
+    public void pacificDrum (dur beat,int k[],int hh[])
     {
         while(true)
         {
@@ -300,14 +311,15 @@ public class Drum
                 {
                     0 => Wasa.pos;
                 }
-                (60/beat)::second => now;
+                beat => now;
             }
         }
     }
     
-    public void pacificDrum (float beat,float div,int k[],int hh[])
+    public void pacificDrum (dur beat,float div,int k[],int hh[])
     {
-        240.0/beat => float tempo;
+        (div / 4) => float factor;
+        (beat / factor) => dur tempo;
         
         while(true)
         {
@@ -321,7 +333,7 @@ public class Drum
                 {
                     0 => Wasa.pos;
                 }
-                (tempo/div)::second => now;
+                tempo => now;
             }
         }
     }
@@ -349,7 +361,7 @@ public class Drum
         }
     }
     
-    public void pacificDrum (float beat,int k[],int s[],int hh[])
+    public void pacificDrum (dur beat,int k[],int s[],int hh[])
     {
         while(true)
         {
@@ -367,14 +379,15 @@ public class Drum
                 {
                     0 => Wasa.pos;
                 }
-                (60/beat)::second => now;
+                beat => now;
             }
         }
     }
     
-    public void pacificDrum (float beat,float div,int k[],int s[],int hh[])
+    public void pacificDrum (dur beat,float div,int k[],int s[],int hh[])
     {
-        240.0/beat => float tempo;
+        (div / 4) => float factor;
+        (beat / factor) => dur tempo;
         
         while(true)
         {
@@ -392,7 +405,7 @@ public class Drum
                 {
                     0 => Wasa.pos;
                 }
-                (tempo/div)::second => now;
+                tempo => now;
             }
         }
     }
@@ -411,7 +424,7 @@ public class Drum
         }
     }
     
-    public void synthDrum (float beat,int k[])
+    public void synthDrum (dur beat,int k[])
     {
         while(true)
         {
@@ -421,14 +434,15 @@ public class Drum
                 {
                     1.0 => kick.next;
                 }
-                (60/beat)::second => now;
+                beat => now;
             }
         }
     }
     
-    public void synthDrum (float beat,float div,int k[])
+    public void synthDrum (dur beat,float div,int k[])
     {
-        240.0/beat => float tempo;
+        (div / 4) => float factor;
+        (beat / factor) => dur tempo;
         
         while(true)
         {
@@ -438,7 +452,7 @@ public class Drum
                 {
                     1.0 => kick.next;
                 }
-                (tempo/div)::second => now;
+                tempo => now;
             }
         }
     }
@@ -462,7 +476,7 @@ public class Drum
         }
     }
     
-    public void synthDrum (float beat,int k[],int hh[])
+    public void synthDrum (dur beat,int k[],int hh[])
     {
         while(true)
         {
@@ -476,14 +490,15 @@ public class Drum
                 {
                     hihat.keyOn();
                 }
-                (60/beat)::second => now;
+                beat => now;
             }
         }
     }
     
-    public void synthDrum (float beat,float div,int k[],int hh[])
+    public void synthDrum (dur beat,float div,int k[],int hh[])
     {
-        240.0/beat => float tempo;
+        (div / 4) => float factor;
+        (beat / factor) => dur tempo;
         
         while(true)
         {
@@ -497,7 +512,7 @@ public class Drum
                 {
                     hihat.keyOn();
                 }
-                (tempo/div)::second => now;
+                tempo => now;
             }
         }
     }
@@ -525,7 +540,7 @@ public class Drum
         }
     }
     
-    public void synthDrum (float beat,int k[],int s[],int hh[])
+    public void synthDrum (dur beat,int k[],int s[],int hh[])
     {
         while(true)
         {
@@ -543,14 +558,15 @@ public class Drum
                 {
                     hihat.keyOn();
                 }
-                (60/beat)::second => now;
+                beat => now;
             }
         }
     }
     
-    public void synthDrum (float beat,float div,int k[],int s[],int hh[])
+    public void synthDrum (dur beat,float div,int k[],int s[],int hh[])
     {
-        240.0/beat => float tempo;
+        (div / 4) => float factor;
+        (beat / factor) => dur tempo;
         
         while(true)
         {
@@ -568,7 +584,7 @@ public class Drum
                 {
                     hihat.keyOn();
                 }
-                (tempo/div)::second => now;
+                tempo => now;
             }
         }
     }
