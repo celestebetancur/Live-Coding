@@ -10,11 +10,6 @@ public class Sync
 {
     static float tSync; 
     
-    public float sync() 
-    {
-        8.0 => tSync; return tSync;
-    }
-    
     public float sync(float beats)
     {
         beats => tSync; return tSync;
